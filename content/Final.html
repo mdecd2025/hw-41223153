@@ -149,8 +149,25 @@ img.add_border {
 <p style="padding-left: 30px;"><span>籃框架被配置在一定範圍內, 可隨機慢速前進、後退及左右擺動, 投籃機構系統帶有一定數量的籃球, 被配置在可自由移動的輪車上.</span></p>
 <p style="padding-left: 30px;"><span>操作者可利用鍵盤特定按鍵控制投籃輪車的移動並發射投籃, 每投出一球後系統透過記分板進行計分, 並由送球機構進行補球或移動輪車取球, 遊戲可進行至全部數量籃球投完為止.</span></p>
 <p>請將期末協同專案執行過程、內容與心得, 製作成影片，配合字幕上傳至 Youtube 後嵌入各階段的期末報告頁面中.</p>
-<p>影片標題: <span style="background-color: #ffff00;">國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - 各階段影片主題<br/></span></p>
-<br />3-3 << <a href='3-3.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython</div>
+<p>影片標題: <span style="background-color: #ffff00;">國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - 各階段影片主題</span></p>
+<p></p>
+<p><span style="background-color: #ffff00;">投球數量限制:</span></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="350" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Lpxniaql9L4" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - 投球數限制" width="500"></iframe></p>
+<p><span style="background-color: #ffff00;">投球機構自動賦歸:</span></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="350" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/r41Hi9_yYyk" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - 加入投球後自動賦歸" width="500"></iframe></p>
+<p><span style="background-color: #ffff00;">籃框隨機移動和感測器角度調整:</span></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="350" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/yII4DgreWbk" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - 籃框隨機移動和更改偵測器方向" width="500"></iframe></p>
+<p><span style="background-color: #ffff00;">最終成品展示:</span></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="350" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/2i1l_IaEPZI" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - Final" width="500"></iframe></p>
+<p><span style="background-color: #ffff00;">檔案下載:</span></p>
+<p><span style="background-color: #ffffff;"><a href="./../downloads/cd2025_final_41223153.7z" style="background-color: #ffffff;">cd2025_final_41223153.7z</a></span></p>
+<p><span style="background-color: #ffffff;"></span></p>
+<p><span style="background-color: #ffff00;">心得:</span></p>
+<p>一開始我先做球數定量限制的部分，我用原本的生成球程式來進行修改，保留原本透過按鍵來生成球的部分，另外再讓<span>ChatGPT</span>幫我加入，生成球數的限制，當總生成球數等於<span>10</span>球時，送出訊息<span>[</span>遊戲結束，已投出<span>10</span>球<span>]</span>，並停止按鍵生成球的功能，來達到意義上的定量限制，當然也能更改成更多或更少球數。</p>
+<p>投籃機的本體部分，我將原先的投籃機制做了改變，原本是按下<span>M</span>驅動擺臂投出球，按下<span>K</span>讓擺臂回到<span>0</span>度，也就是初始的位置，我將以上兩個按鍵的功能進行整合，變成按下<span>M</span>投出後等待<span>1</span>秒後回歸到原點，這樣可以避免還沒將擺臂正，就將球生成導致兩者相互碰撞，偏移原本的準心和浪費一次投球的機會，並且在程式中我也加入了，投出球時訊息欄顯示<span>[</span>投球<span>]</span>，歸位後顯示<span>[</span>自動賦歸<span>]</span>等提示訊息，可以用來時刻監控投籃機本體的運作情況。</p>
+<p>籃框隨機移動的部分，我使用原本的程式將裡面的控制部分移除，讓<span>ChatGPT</span>幫我寫一個當得分偵測器，偵測到進球得分後，雖機的進行小幅度移動，來改變籃框的位置，所以每進一球，籃框就會透過移動或旋轉來改變位置，直到遊戲結束；偵測器的部分，原先要投得非常精準才能得分，於是我先將感測範圍<span>0.11</span>公尺加大，但當範圍大於<span>0.2</span>公尺時，會偵測到籃框本體，導致系統一直判定得分，我取一個中間質用<span>0.15</span>，並將感測器的方向進行調整，原本的方向是朝下，會導致有些角度進球偵測不到，所以我將偵測的方向改成向上向前，這樣就能改善這個問題，也能避免反彈球經過籃框下方，誤加分的情況發生。</p>
+<p></p>
+<p></p><br />3-3 << <a href='3-3.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython</div>
         
     <!-- footer -->
       <div class="container">
