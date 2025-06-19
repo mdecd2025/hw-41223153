@@ -50,7 +50,8 @@
 <p><span style="background-color: #ffff00;">開啟控制台</span>--&gt;<span style="background-color: #ffff00;">網際網路</span>--&gt;<span style="background-color: #ffff00;">共用中心</span>--&gt;<span style="background-color: #ffff00;">乙太網路</span>--&gt;<span style="background-color: #ffff00;">內容</span></p>
 <p><span style="background-color: #ffff00;"></span></p>
 <p><span style="background-color: #ffffff;"><img alt="" height="200" src="/images/123.png" width="250"/></span></p>
-<p><span style="background-color: #ffffff;"></span></p><h2>近端</h2>
+<p><span style="background-color: #ffffff;"></span></p>
+<h2>近端</h2>
 <p>完成IPV6的設定後，開啟小黑窗。</p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">cd ..
  //切空資料夾
@@ -66,6 +67,15 @@ cd hw-41223153
 cms
 //啟動近端編輯網頁
 </pre>
+<h2>W16</h2>
+<p><span style="background-color: #ffff00;">抽查作業以及考試的內容</span></p>
+<p>Q:HW1中的link1的設定中Pose應該設定哪一階?</p>
+<p>A:打開第一個旋轉節點，裡面的 endPoint 打開children，裡面新增Pose和第二個旋轉節點，Pose主要的功能是定義他底下shape的位置和放置角度，shape則是用來增加一個物件。</p>
+<p></p>
+<p><img alt="" height="350" src="/images/w16.png" width="500"/></p><h2>W17</h2>
+<p>第二次作業抽查</p>
+<p>Q:更改HW2的link3的長度為100m</p>
+<p>A:</p>
 <p></p><h1>Homework</h1>
 <p>作業 (30%)</p>
 <p>HW1 (5%): <span style="background-color: #ffff00;">建立由 Box 組成的平面四連桿機構 Webots 模擬場景</span></p>
@@ -232,7 +242,8 @@ cms
 <p>投籃機的本體部分，我將原先的投籃機制做了改變，原本是按下<span>M</span>驅動擺臂投出球，按下<span>K</span>讓擺臂回到<span>0</span>度，也就是初始的位置，我將以上兩個按鍵的功能進行整合，變成按下<span>M</span>投出後等待<span>1</span>秒後回歸到原點，這樣可以避免還沒將擺臂正，就將球生成導致兩者相互碰撞，偏移原本的準心和浪費一次投球的機會，並且在程式中我也加入了，投出球時訊息欄顯示<span>[</span>投球<span>]</span>，歸位後顯示<span>[</span>自動賦歸<span>]</span>等提示訊息，可以用來時刻監控投籃機本體的運作情況。</p>
 <p>籃框隨機移動的部分，我使用原本的程式將裡面的控制部分移除，讓<span>ChatGPT</span>幫我寫一個當得分偵測器，偵測到進球得分後，雖機的進行小幅度移動，來改變籃框的位置，所以每進一球，籃框就會透過移動或旋轉來改變位置，直到遊戲結束；偵測器的部分，原先要投得非常精準才能得分，於是我先將感測範圍<span>0.11</span>公尺加大，但當範圍大於<span>0.2</span>公尺時，會偵測到籃框本體，導致系統一直判定得分，我取一個中間質用<span>0.15</span>，並將感測器的方向進行調整，原本的方向是朝下，會導致有些角度進球偵測不到，所以我將偵測的方向改成向上向前，這樣就能改善這個問題，也能避免反彈球經過籃框下方，誤加分的情況發生。</p>
 <p></p>
-<p></p><h1>Brython</h1>
+<p></p>
+<h1>Brython</h1>
 <p><button id="add1to100">1 add to 100</button></p>
 <!-- 導入 brython 程式庫 -->
 <p>
