@@ -228,12 +228,88 @@ cms
 <p></p>
 <p><span style="background-color: #ffff00;">投球數量限制:</span></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="350" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Lpxniaql9L4" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - 投球數限制" width="500"></iframe></p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false"># 新增球數上限與計數
+max_balls = 10
+balls_created = 0</pre>
+<p><span style="background-color: #ffff00;"></span></p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">if key == ord('F') and (current_time - last_key_time &gt;= debounce_time):
+        if balls_created &gt;= max_balls:
+            print("遊戲結束，已生成10顆球，不可再產生新球。")
+        elif waiting_ball_def is None:
+            create_static_sphere(supervisor, *default_feed_pos)
+            current_tracked_def = waiting_ball_def
+            delete_trajectory_points()
+            balls_created += 1
+        else:
+            print("還有一顆球等待擊出，請先擊出再產生新球。")
+        last_key_time = current_time</pre>
 <p><span style="background-color: #ffff00;">投球機構自動賦歸:</span></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="350" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/r41Hi9_yYyk" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - 加入投球後自動賦歸" width="500"></iframe></p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">    # === 機構升起＋自動賦歸控制 ===
+    if mechanism_enabled:
+        motor_position = sensor.getValue()
+
+        # 按下 M 鍵時觸發升起（且尚未升起）
+        if key == ord('M') or key == ord('m'):
+            if not key_pressed['m'] and not mechanism_raised:
+                motor.setPosition(POSITION_M)
+                print("投球")
+                mechanism_raised = True
+                raise_start_time = current_time
+            key_pressed['m'] = True
+        else:
+            key_pressed['m'] = False
+
+        # 已升起 → 檢查是否超過1秒 → 回復
+        if mechanism_raised and raise_start_time is not None:
+            if current_time - raise_start_time &gt;= 1.0:
+                motor.setPosition(POSITION_K)
+                print("自動回復")
+                mechanism_raised = False
+                raise_start_time = None</pre>
+<p></p>
+<p></p>
 <p><span style="background-color: #ffff00;">籃框隨機移動和感測器角度調整:</span></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="350" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/yII4DgreWbk" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - 籃框隨機移動和更改偵測器方向" width="500"></iframe></p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">print("⚙️ 初始靜止：當感測器感應到球時得分，然後才啟動隨機移動")
+
+# === 主迴圈 ===
+while robot.step(timestep) != -1:
+    now = robot.getTime()
+    dt = now - last_time
+    last_time = now
+
+    sensor_value = sensor.getValue()
+    distance = ad_to_distance(sensor_value)
+
+    if is_moving:
+        set_wheel_velocity(*current_velocity)
+        move_timer -= dt
+        if move_timer &lt;= 0:
+            # 移動時間結束，停止
+            is_moving = False
+            set_wheel_velocity(0, 0, 0, 0)
+    else:
+        set_wheel_velocity(0, 0, 0, 0)
+        if distance &lt; DISTANCE_THRESHOLD and (now - last_score_time) &gt; SCORE_INTERVAL:
+            # 得分並開始移動
+            score += score_to_send
+            print(f"🎯 得分！距離 {distance:.3f} m，總分：{score}")
+            emitter.send(str(score_to_send).encode('utf-8'))
+            last_score_time = now
+
+            # 啟動隨機移動
+            def rv(): return random.uniform(-MAX_VELOCITY, MAX_VELOCITY)
+            current_velocity = (rv(), rv(), rv(), rv())
+            move_timer = MOVE_DURATION
+            is_moving = True</pre>
 <p><span style="background-color: #ffff00;">最終成品展示:</span></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="350" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/2i1l_IaEPZI" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - Final" width="500"></iframe></p>
+<p><span style="background-color: #ffff00;">使用的程式分別是:</span></p>
+<p>投籃機 fourbar_test</p>
+<p>生成球 ball_test</p>
+<p>籃框 move_test</p>
+<p>直接創一新的程式控制器，保留原始的程式碼，在出錯的時候還能切回原始代碼，進行不同面向的修改。</p>
 <p><span style="background-color: #ffff00;">檔案下載:</span></p>
 <p><span style="background-color: #ffffff;"><a href="/downloads/cd2025_final_41223153.7z" style="background-color: #ffffff;">cd2025_final_41223153.7z</a></span></p>
 <p><span style="background-color: #ffffff;"></span><span style="background-color: #ffff00;">報告:</span></p>
