@@ -305,14 +305,17 @@ while robot.step(timestep) != -1:
             is_moving = True</pre>
 <p><span style="background-color: #ffff00;">最終成品展示:</span></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="350" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/2i1l_IaEPZI" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 期末報告 - 學員學號 - Final" width="500"></iframe></p>
-<p>使用的程式分別是:</p>
+<p><span style="background-color: #ffff00;">使用的程式分別是:</span></p>
 <p>投籃機 fourbar_test</p>
 <p>生成球 ball_test</p>
 <p>籃框 move_test</p>
+<p>直接創一新的程式控制器，保留原始的程式碼，在出錯的時候還能切回原始代碼，進行不同面向的修改。</p>
 <p><span style="background-color: #ffff00;">檔案下載:</span></p>
 <p><span style="background-color: #ffffff;"><a href="/downloads/cd2025_final_41223153.7z" style="background-color: #ffffff;">cd2025_final_41223153.7z</a></span></p>
 <p><span style="background-color: #ffffff;"></span><span style="background-color: #ffff00;">報告:</span></p>
 <p><span style="background-color: #ffffff;"><a href="/downloads/Shootcar-Project.pdf" style="background-color: #ffffff;">Shootcar-Project.pdf</a></span></p>
+<p><span style="background-color: #ffff00;">ChatGPT 對話內容:</span></p>
+<p><span style="background-color: #ffff00;"></span></p>
 <p><span style="background-color: #ffff00;">心得:</span></p>
 <p>一開始我先做球數定量限制的部分，我用原本的生成球程式來進行修改，保留原本透過按鍵來生成球的部分，另外再讓<span>ChatGPT</span>幫我加入，生成球數的限制，當總生成球數等於<span>10</span>球時，送出訊息<span>[</span>遊戲結束，已投出<span>10</span>球<span>]</span>，並停止按鍵生成球的功能，來達到意義上的定量限制，當然也能更改成更多或更少球數。</p>
 <p>投籃機的本體部分，我將原先的投籃機制做了改變，原本是按下<span>M</span>驅動擺臂投出球，按下<span>K</span>讓擺臂回到<span>0</span>度，也就是初始的位置，我將以上兩個按鍵的功能進行整合，變成按下<span>M</span>投出後等待<span>1</span>秒後回歸到原點，這樣可以避免還沒將擺臂正，就將球生成導致兩者相互碰撞，偏移原本的準心和浪費一次投球的機會，並且在程式中我也加入了，投出球時訊息欄顯示<span>[</span>投球<span>]</span>，歸位後顯示<span>[</span>自動賦歸<span>]</span>等提示訊息，可以用來時刻監控投籃機本體的運作情況。</p>
